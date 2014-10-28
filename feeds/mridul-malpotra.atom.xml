@@ -1,5 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>NILMTK Blog Update</title><link href="/" rel="alternate"></link><link href="/feeds/mridul-malpotra.atom.xml" rel="self"></link><id>/</id><updated>2014-10-20T11:21:00+02:00</updated><entry><title>Problems with the ECO Converter</title><link href="/problems-eco-converter.html" rel="alternate"></link><updated>2014-10-20T11:21:00+02:00</updated><author><name>Mridul Malpotra</name></author><id>tag:,2014-10-20:problems-eco-converter.html</id><summary type="html">&lt;p&gt;ECO Converter is being made at &lt;a href="https://github.com/mridulmalpotra/nilmtk/blob/master/nilmtk/dataset_converters/ECO"&gt;this repository.&lt;/a&gt;&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>NILMTK Blog Update</title><link href="/" rel="alternate"></link><link href="/feeds/mridul-malpotra.atom.xml" rel="self"></link><id>/</id><updated>2014-10-29T01:27:00+01:00</updated><entry><title>ECO Converter - How it fared</title><link href="/eco-converter-fared.html" rel="alternate"></link><updated>2014-10-29T01:27:00+01:00</updated><author><name>Mridul Malpotra</name></author><id>tag:,2014-10-29:eco-converter-fared.html</id><summary type="html">&lt;p&gt;ECO Converter is being made at &lt;a href="https://github.com/mridulmalpotra/nilmtk/blob/master/nilmtk/dataset_converters/ECO"&gt;this repository.&lt;/a&gt;&lt;/p&gt;
+&lt;h1&gt;Few problems that were solved&lt;/h1&gt;
+&lt;h3&gt;Problems: Memory Error and Slow Algorithm&lt;/h3&gt;
+&lt;p&gt;As mentioned earlier, too much memory and too less resources were allocated. Some approaches to solving this:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;As suggested by Nipun sir, I implemented an appending function to the existing HDF5file. Hence in this scenario, we would not merge the concatinated dataframe all at once but append it for every file. This made the speed of the program predictable, error-free and executed perfectly.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;This was also the time when I upgraded my laptop to a new one. Although I had to install and run nilmtk and its all dependencies from scratch, it made execution faster and I had more RAM and CPU speed to allot. This also helped in the process.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;&lt;em&gt;Mridul&lt;/em&gt;&lt;/h4&gt;</summary><category term="eco"></category><category term="converter"></category><category term="nilmtk"></category><category term="hdf5"></category><category term="memory"></category><category term="metadata"></category></entry><entry><title>Problems with the ECO Converter</title><link href="/problems-eco-converter.html" rel="alternate"></link><updated>2014-10-20T11:21:00+02:00</updated><author><name>Mridul Malpotra</name></author><id>tag:,2014-10-20:problems-eco-converter.html</id><summary type="html">&lt;p&gt;ECO Converter is being made at &lt;a href="https://github.com/mridulmalpotra/nilmtk/blob/master/nilmtk/dataset_converters/ECO"&gt;this repository.&lt;/a&gt;&lt;/p&gt;
 &lt;h1&gt;Few problems as of now in the converter&lt;/h1&gt;
 &lt;h2&gt;Problem 1: Memory Error&lt;/h2&gt;
 &lt;p&gt;&lt;img alt="Memory Error" src="../images/mem_error.png" /&gt;&lt;/p&gt;

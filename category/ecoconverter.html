@@ -22,7 +22,43 @@
 
             <aside id="featured" class="body">
                 <article>
-                    <h1 class="entry-title"><a href="/problems-eco-converter.html">Problems with the ECO Converter</a></h1>
+                    <h1 class="entry-title"><a href="/eco-converter-fared.html">ECO Converter - How it fared</a></h1>
+<footer class="post-info">
+        <abbr class="published" title="2014-10-29T01:27:00">
+                Published: Wed 29 October 2014
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/mridul-malpotra.html">Mridul Malpotra</a>
+        </address>
+<p>In <a href="/category/ecoconverter.html">ECOConverter</a>. </p>
+<p>tags: <a href="/tag/eco.html">eco</a> <a href="/tag/converter.html">converter</a> <a href="/tag/nilmtk.html">nilmtk</a> <a href="/tag/hdf5.html">hdf5</a> <a href="/tag/memory.html">memory</a> <a href="/tag/metadata.html">metadata</a> </p>
+</footer><!-- /.post-info --><p>ECO Converter is being made at <a href="https://github.com/mridulmalpotra/nilmtk/blob/master/nilmtk/dataset_converters/ECO">this repository.</a></p>
+<h1>Few problems that were solved</h1>
+<h3>Problems: Memory Error and Slow Algorithm</h3>
+<p>As mentioned earlier, too much memory and too less resources were allocated. Some approaches to solving this:</p>
+<ul>
+<li>
+<p>As suggested by Nipun sir, I implemented an appending function to the existing HDF5file. Hence in this scenario, we would not merge the concatinated dataframe all at once but append it for every file. This made the speed of the program predictable, error-free and executed perfectly.</p>
+</li>
+<li>
+<p>This was also the time when I upgraded my laptop to a new one. Although I had to install and run nilmtk and its all dependencies from scratch, it made execution faster and I had more RAM and CPU speed to allot. This also helped in the process.</p>
+</li>
+</ul>
+<h4><em>Mridul</em></h4>                </article>
+            </aside><!-- /#featured -->
+                <section id="content" class="body">
+                    <h1>Other articles</h1>
+                    <hr />
+                    <ol id="posts-list" class="hfeed">
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/problems-eco-converter.html" rel="bookmark"
+                           title="Permalink to Problems with the ECO Converter">Problems with the ECO Converter</a></h1>
+                </header>
+
+                <div class="entry-content">
 <footer class="post-info">
         <abbr class="published" title="2014-10-20T11:21:00">
                 Published: Mon 20 October 2014
@@ -33,29 +69,15 @@
         </address>
 <p>In <a href="/category/ecoconverter.html">ECOConverter</a>. </p>
 <p>tags: <a href="/tag/eco.html">eco</a> <a href="/tag/converter.html">converter</a> <a href="/tag/nilmtk.html">nilmtk</a> <a href="/tag/hdf5.html">hdf5</a> <a href="/tag/memory.html">memory</a> <a href="/tag/metadata.html">metadata</a> </p>
-</footer><!-- /.post-info --><p>ECO Converter is being made at <a href="https://github.com/mridulmalpotra/nilmtk/blob/master/nilmtk/dataset_converters/ECO">this repository.</a></p>
-<h1>Few problems as of now in the converter</h1>
-<h2>Problem 1: Memory Error</h2>
-<p><img alt="Memory Error" src="../images/mem_error.png" /></p>
-<p>While implementing the dataset, the primary problem that I am facing is the large size of the dataset. The zipped files of the Smart meter readings were about 2.5 GB in size. This decompressed and added with a timestamp of <em>numpy.datetime64</em> makes the file size large.</p>
-<h3>Dataset structure</h3>
-<p>ECO Dataset has folder 'i_sm_csv' and 'i_plug_csv' where i is the building no.</p>
-<ul>
-<li>i_sm_csv has a folder i</li>
-<li>i_plug_csv has a folder 01, 02,....n where n are the plug numbers.</li>
-</ul>
-<p>Each folder has a CSV file per day, with each file containing 86400 entries mapping every second of that day. Even for plug data which has a compressed zip size totalling 120 MB, owing to the 64-bit time stamp we get the hdf5file having a size <em>5-6 GB</em>!</p>
-<p>The storage is even greater for a smart meter, making the final file large in size.</p>
-<h3>Low resources</h3>
-<p>My initial location for the HDF5file was a drive with probably not enough storage space as it encountered memory error quite easily. Doing the same in another disk partition with plenty space made the program last longer, but it freezes my system before completing even 1 smart_meter_csv. The CPU was becoming a throttle here as a single core is used 100%. Possible multithreading implementations could help, but cannot say with surety.</p>
-<h2>Problem 2: Slow Algorithm</h2>
-<p>My approach to calculating the dataframe for a meter is to initialize a dataframe and keep appending a dataframe per csv file. This means around 200-250 operations per meter per folder. This approach is linear and takes a long time for large data. As we are simply appending the dataframes together and sorting by index in the end, one clear method to speed up the process is using a divide and conquer approach and reduce the overall complexity to O(log(n)). This puts a lesser load on the CPU. If this will benefit the algorithm, I will implement it in the converter.</p>
-<p>However, the dataframe object created per meter becomes too huge for the smart meter computations. I will try to find some alternative for storing in the hdf5file.</p>
-<h4><em>Mridul</em></h4>                </article>
+</footer><!-- /.post-info -->                <p>Some problems and issues faced with the ECO Converter</p>
+                <a class="readmore" href="/problems-eco-converter.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+                </ol><!-- /#posts-list -->
 <p class="paginator">
     Page 1 / 1
 </p>
-            </aside><!-- /#featured -->
+                </section><!-- /#content -->
         <section id="extras" class="body">
                 <div class="blogroll">
                         <h2>blogroll</h2>
