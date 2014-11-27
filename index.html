@@ -16,35 +16,130 @@
                 <nav><ul>
                     <li><a href="/category/ecoconverter.html">ECOConverter</a></li>
                     <li><a href="/category/general.html">General</a></li>
+                    <li><a href="/category/nilmtk-nilm-eval.html">NILMTK & NILM-Eval</a></li>
                     <li><a href="/category/python-for-data-analysis.html">Python for Data Analysis</a></li>
                 </ul></nav>
         </header><!-- /#banner -->
 
             <aside id="featured" class="body">
                 <article>
-                    <h1 class="entry-title"><a href="/eco-converter-fared.html">ECO Converter - How it fared</a></h1>
+                    <h1 class="entry-title"><a href="/nilm-eval-and-eco-dataset.html">A summary of NILM-Eval and the ECO Dataset</a></h1>
 <footer class="post-info">
-        <abbr class="published" title="2014-10-29T01:27:00">
-                Published: Wed 29 October 2014
+        <abbr class="published" title="2014-11-26T21:25:00+01:00">
+                Published: Wed 26 November 2014
         </abbr>
 
         <address class="vcard author">
                 By                         <a class="url fn" href="/author/mridul-malpotra.html">Mridul Malpotra</a>
         </address>
-<p>In <a href="/category/ecoconverter.html">ECOConverter</a>. </p>
-<p>tags: <a href="/tag/eco.html">eco</a> <a href="/tag/converter.html">converter</a> <a href="/tag/nilmtk.html">nilmtk</a> <a href="/tag/hdf5.html">hdf5</a> <a href="/tag/memory.html">memory</a> <a href="/tag/metadata.html">metadata</a> </p>
-</footer><!-- /.post-info --><p>ECO Converter is being made at <a href="https://github.com/mridulmalpotra/nilmtk/blob/master/nilmtk/dataset_converters/ECO">this repository.</a></p>
-<h1>Few problems that were solved</h1>
-<h3>Problems: Memory Error and Slow Algorithm</h3>
-<p>As mentioned earlier, too much memory and too less resources were allocated. Some approaches to solving this:</p>
+<p>In <a href="/category/nilmtk-nilm-eval.html">NILMTK & NILM-Eval</a>. </p>
+<p>tags: <a href="/tag/nilm.html">nilm</a> <a href="/tag/nilm-eval.html">nilm-eval</a> <a href="/tag/eco.html">eco</a> <a href="/tag/algorithms.html">algorithms</a> <a href="/tag/parson.html">parson</a> <a href="/tag/weiss.html">weiss</a> <a href="/tag/baranski.html">baranski</a> <a href="/tag/kolter.html">kolter</a> </p>
+</footer><!-- /.post-info --><p><a href="https://www.vs.inf.ethz.ch/publ/papers/beckel-2014-nilm.pdf">Link to the paper</a></p>
+<h1>A summary on the evaluation of NILM-Eval on certain NILM-Algorithms</h1>
+<p>The paper was focused on primarily demonstrating the <strong>NILM-Eval framework</strong> alongside their publicly available ECO Dataset on 2 supervised (semi) and 2 unsupervised algorithms. The analysis included defining configurations, testing relevant dataset portions on each algorithm and determining the efficiency and accuracy of each.</p>
+<h3>Algorithms criteria and Evaluation methodology</h3>
+<p>The primary parameters which were considered in NILM-Eval while selecting the algorithms were:</p>
+<ol>
+<li><strong>Data Granularity:</strong> ECO Dataset is sampled at 1 Hz. Variations in the algorithms needed to be considered.</li>
+<li><strong>Learning Methods:</strong> Supervised  or unsupervised. Considerations on clustering algorithms and Hidden Markov models.</li>
+<li><strong>Information Detail:</strong> Various parameters data sampled.</li>
+</ol>
+<p>Bound setting configuration files (default and customized) with multiple dataset parameters for the algorithms implemented in the Framework. Uses MATLAB with multiple instances to scale over. Some parameters measured are:</p>
 <ul>
-<li>
-<p>As suggested by Nipun sir, I implemented an appending function to the existing HDF5file. Hence in this scenario, we would not merge the concatinated dataframe all at once but append it for every file. This made the speed of the program predictable, error-free and executed perfectly.</p>
-</li>
-<li>
-<p>This was also the time when I upgraded my laptop to a new one. Although I had to install and run nilmtk and its all dependencies from scratch, it made execution faster and I had more RAM and CPU speed to allot. This also helped in the process.</p>
-</li>
+<li>Precision(<strong>PRE</strong>)(True positives/ All positives)and Recall(<strong>REC</strong>)(True positives/All true cases) measured.</li>
+<li>Root means square error, deviation for data and switching calculated.</li>
+<li>Calculated <strong>F1</strong> which is the harmonic mean of the precision and the deviation observed.</li>
 </ul>
+<h3>ECO Dataset</h3>
+<ul>
+<li>Primary focus on Plug data.</li>
+<li>Publicly available dataset of 6 Swiss households.</li>
+<li>8 months duration of Smart meter and plug data.</li>
+<li><strong>1 Hz</strong> sampling frequency.</li>
+<li>Measures real and reactive 3-phase power.</li>
+<li>Significant Other portion in dataset owing to the limited plug data sampled.</li>
+<li>Includes occupancy information.</li>
+</ul>
+<p><br></p>
+<h2>Algorithms</h2>
+<p>Each algorithm was used having frequency input comparable to that of ECO Dataset viz. 1 Hz.</p>
+<h4>Parson's Algorithm</h4>
+<ul>
+<li>Uses <strong>Hidden Markov Models (HMM)</strong>, which are systems consisting of and monitoring memoryless processes with random variables. In HMMs, the states observed are kept secret.</li>
+<li>Uses the <strong>Viterbi algorithm</strong>, which finds the hidden states observed in the HMMs.</li>
+<li>Finds most probable state transitions and calculates difference in appliance and average consumption. Repeats for others.</li>
+<li>Makes a training model using these <em>semi-supervised</em> approaches.</li>
+<li>Uses a generic application model for creating the model, unless a specific application model is considered.</li>
+<li>Uses the <strong>REDD Dataset</strong>.</li>
+</ul>
+<h4>Baranski's Algorithm</h4>
+<ul>
+<li>Extracts and clusters events into separate entities.</li>
+<li>Uses the <em>Genetic algorithm</em>, which implements natural selection in the clusters to give most probable application clusters.</li>
+<li>Unsupervised approach followed to cluster. Final most probable state accepted.</li>
+<li>However for more specific application labeling, cluster classification for at least the chief nodes needs to be manual.</li>
+</ul>
+<h4>Weiss' Algorithm</h4>
+<ul>
+<li>Similar to Hart's algorithm to measure and extract switching events in the dataset.</li>
+<li>Maps the <strong>Signature database</strong> for predefined application categories defined to the event data.</li>
+<li>Uses real, active and distortion power to present a more 3 dimensional outlook.</li>
+<li><strong>Supervised approach</strong> in general.</li>
+</ul>
+<h4>Kolter's Algorithm</h4>
+<ul>
+<li>Uses HMM's like Parson's algorithm but unsupervised still.</li>
+<li>Detects the <em>application cycle</em> for ON OFF.</li>
+<li>Implements k-means clustering in order to find the centroid in a cluster of data points s.t. the distance to maximum points is minimized.</li>
+<li>Extension to implement the AFAMAP algorithm for further analysis.</li>
+<li>Obtains no. of applications and their respective consumption pattern.</li>
+<li>Done on the <strong>REDD</strong> Dataset.</li>
+</ul>
+<p><br></p>
+<h2>NILM Results on Algorithms and Conclusions</h2>
+<h4>Parson's Algorithm</h4>
+<ul>
+<li>ECO Dataset scaled to 1/60 Hz (requirement of the algorithm).</li>
+<li>2 primary appliances, Fridge and Microwave.</li>
+<li>Using probable Markov state determination through Viterbi.</li>
+<li>Fridge and Freezer data comparison difficult.</li>
+<li>Household 6 most accurate with <strong>max(F1) = 0.91</strong> for Fridge.</li>
+<li>Household 4 and 5 most accurate for Microwave.</li>
+<li>Due to data aggregation, 59/60 portions of data lost, leading to consumption patterns to differ considerably.</li>
+</ul>
+<h4>Baranski's Algorithm</h4>
+<ul>
+<li>Segregation and clustering of dataset based on switching events with similar changes in power consumption.</li>
+<li>Finite State Machines (FSM) consists of many finite states which are interchangeable amongst each other. </li>
+<li>Classification of these clusters into FSMs based on grouping, which defines approximate application boundaries.</li>
+<li>Average classifications reached at. Fridge discarded in the FSM list owing to OFF periods in separate clusters.</li>
+<li><strong>Did not arrive at concrete comparable data</strong> owing to different I/O for the algorithm.</li>
+<li>Final application labeling done manually based on the power consumption, number of switching events and variations.</li>
+</ul>
+<h4>Weiss' Algorithm</h4>
+<ul>
+<li>Used supervised approach with 1 Hz dataset.</li>
+<li>Categorized into cooling appliances, high power consumption appliances and remaining others.</li>
+<li>Highly accurate for cooling appliances with F1 = 0.91 to 0.94</li>
+<li>Highly accurate for high power consumption appliances with similar F1. However many False negatives leading to low Recall values.</li>
+<li><strong>Overall successful in application modeling</strong> through provided through signature database.</li>
+</ul>
+<h4>Kolter's Algorithm</h4>
+<ul>
+<li>Uses <strong>k-means clustering</strong> to find centroid in cluster and approximates application entities over the dataset.</li>
+<li>Identifies clusters and data snippets before segregating data.</li>
+<li>However, based on the HMM approach, no individual application model construction close to the given consumption model.</li>
+<li>Future expansion suggested based on the <strong>AFAMAP algorithm</strong> (no info found on the algorithm).</li>
+</ul>
+<blockquote>
+<p>This proves that <strong>Supervised (or semi-supervised ) learning</strong> was <strong>dominant</strong> to obtain accurate 
+results with high F1, PRC and REC values. <strong>Weiss' and Parson's</strong> perform better on the ECO Dataset
+and were more consistent with the results. With HMM usage, generic and application specific
+model, Parson's approach is promising, but needs higher frequency data to obtain finer
+results. Weiss potential and performance better than Parson due to same reason.</p>
+</blockquote>
+<p>Some limitations that I saw with the framework was that too many constraints and configuration bindings. This leads to a more artificial simulation than real time load monitoring. Also, as it has been only done on the ECO Dataset, expansion to other sets is favorable.</p>
+<p><em>Comparison with NILMTK in the next post...</em></p>
 <h4><em>Mridul</em></h4>                </article>
             </aside><!-- /#featured -->
                 <section id="content" class="body">
@@ -54,13 +149,35 @@
 
             <li><article class="hentry">
                 <header>
+                    <h1><a href="/eco-converter-fared.html" rel="bookmark"
+                           title="Permalink to ECO Converter - How it fared">ECO Converter - How it fared</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2014-10-29T01:27:00+01:00">
+                Published: Wed 29 October 2014
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/mridul-malpotra.html">Mridul Malpotra</a>
+        </address>
+<p>In <a href="/category/ecoconverter.html">ECOConverter</a>. </p>
+<p>tags: <a href="/tag/eco.html">eco</a> <a href="/tag/converter.html">converter</a> <a href="/tag/nilmtk.html">nilmtk</a> <a href="/tag/hdf5.html">hdf5</a> <a href="/tag/memory.html">memory</a> <a href="/tag/metadata.html">metadata</a> </p>
+</footer><!-- /.post-info -->                <p>How some problems on ECO Converter were rectified and resolved</p>
+                <a class="readmore" href="/eco-converter-fared.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
                     <h1><a href="/problems-eco-converter.html" rel="bookmark"
                            title="Permalink to Problems with the ECO Converter">Problems with the ECO Converter</a></h1>
                 </header>
 
                 <div class="entry-content">
 <footer class="post-info">
-        <abbr class="published" title="2014-10-20T11:21:00">
+        <abbr class="published" title="2014-10-20T11:21:00+02:00">
                 Published: Mon 20 October 2014
         </abbr>
 
@@ -82,7 +199,7 @@
 
                 <div class="entry-content">
 <footer class="post-info">
-        <abbr class="published" title="2014-09-24T04:47:00">
+        <abbr class="published" title="2014-09-24T04:47:00+02:00">
                 Published: Wed 24 September 2014
         </abbr>
 
@@ -115,7 +232,7 @@
 
                 <div class="entry-content">
 <footer class="post-info">
-        <abbr class="published" title="2014-09-23T23:12:00">
+        <abbr class="published" title="2014-09-23T23:12:00+02:00">
                 Published: Tue 23 September 2014
         </abbr>
 
@@ -128,30 +245,6 @@
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
                 <a class="readmore" href="/chap8-plotting-and-visualization.html">read more</a>
-                </div><!-- /.entry-content -->
-            </article></li>
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="/chap2-getting-started.html" rel="bookmark"
-                           title="Permalink to Chapter 2 - Getting Started">Chapter 2 - Getting Started</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2014-09-22T13:43:00">
-                Published: Mon 22 September 2014
-        </abbr>
-
-        <address class="vcard author">
-                By                         <a class="url fn" href="/author/mridul.html">Mridul</a>
-        </address>
-<p>In <a href="/category/python-for-data-analysis.html">Python for Data Analysis</a>. </p>
-<p>tags: <a href="/tag/ipython.html">ipython</a> <a href="/tag/notebook.html">notebook</a> <a href="/tag/python.html">python</a> <a href="/tag/data-analysis.html">data analysis</a> <a href="/tag/introduction.html">introduction</a> </p>
-</footer><!-- /.post-info -->                
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-                <a class="readmore" href="/chap2-getting-started.html">read more</a>
                 </div><!-- /.entry-content -->
             </article></li>
                 </ol><!-- /#posts-list -->
